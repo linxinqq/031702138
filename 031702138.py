@@ -75,7 +75,28 @@ def receivezhen(name):
         nameb=name
        
     return namea,nameb
-    
+
+def receivelu(name):    
+    if name.find(u"路",1) !=-1:
+        name=name.split(u'路')
+        namea=name[0]+u'路'
+        nameb=name[1]
+    else:
+        namea=""
+        nameb=name
+       
+    return namea,nameb
+
+def receivehao(name):    
+    if name.find(u"号",1) !=-1:
+        name=name.split(u'号')
+        namea=name[0]+u'号'
+        nameb=name[1]
+    else:
+        namea=""
+        nameb=name
+    return namea,nameb
+
 def receivenumber(str):
     if str.find('1',1) != -1:
         start=str.find('1')
@@ -98,15 +119,23 @@ def receivename(str):
 def main():
     need={}
     shuju=input()
+    if(shuju[0]=='1'):
+        a=1
+    else:
+        a=0
+    shuju=shuju[2:]
     name,T=receivename(shuju)
     number,T=receivenumber(T)
     sheng,T=receivesheng(T)
     shi,T=receiveshi(T)
     xian,T=receivexian(T)
     zhen,T=receivezhen(T)
-    
-    dizhi=[sheng,shi,xian,zhen,T]
-    
+    if a==1:
+        dizhi=[sheng,shi,xian,zhen,T]
+    else:
+        lu,T=receivelu(T)
+        hao,T=receivehao(T)
+        dizhi=[sheng,shi,xian,zhen,lu,hao,T]
     need[u"姓名"]=name
     need[u"手机"]=number
     need[u"地址"]=dizhi
